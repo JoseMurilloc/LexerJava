@@ -1,7 +1,8 @@
 class HelloWorld {
     public static void main(String args[]) {
         int age = 10;   
-        float height = 1.70;
+        float height = 1.70 * age;
+        float media = 10 - 10.2;
 
         if (age > 10 && heigth > 1.40) {
             System.out.println("Maior de 140cm");

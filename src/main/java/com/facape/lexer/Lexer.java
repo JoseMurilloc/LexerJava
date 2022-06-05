@@ -38,6 +38,7 @@ public class Lexer {
            Token.Tokens token = lexer.yylex();
            if (token == null) {
                
+               
                TitleTokenMessage();
                forArrayTokens(listTokens);
                
@@ -48,7 +49,7 @@ public class Lexer {
            
            int find = findLexemeInTableSymbol(symbols, lexer.lexeme);
            if (token == Token.Tokens.TK_ERROR) {
-               System.out.println(lexer.lexeme);
+               System.out.println("Error na coluna: " + column + " no seguinte token: " + lexer.lexeme);
            }
            if(find == -1) {
               Token newToken = new Token(positionTable, token);
@@ -58,12 +59,11 @@ public class Lexer {
               symbols.add(newSymbol);
               
               positionTable += 1;
-              column +=1;
            } else {
                Token newToken = new Token(find, token);
                listTokens.add(newToken);
-               column += 1;
            }
+           column += 1;
        }
     }
     
