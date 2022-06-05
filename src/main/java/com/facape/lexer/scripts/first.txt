@@ -1,6 +1,6 @@
 class HelloWorld {
     public static void main(String args[]) {
         string na_me = "Murillo";
-        int áge = 10;
+        int age = 10;
     }
 }
