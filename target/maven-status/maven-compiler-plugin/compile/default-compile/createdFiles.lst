@@ -1,4 +1,5 @@
 com\facape\lexer\Token.class
-LexerScanner.class
+com\facape\lexer\LexerScanner.class
 com\facape\lexer\Lexer.class
+com\facape\lexer\TableSymbols.class
 com\facape\lexer\Token$Tokens.class

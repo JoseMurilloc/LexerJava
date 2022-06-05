@@ -17,7 +17,7 @@ whitespace = {space}|{line_end}| [\t\n]
 commentary = {commentary_line}|{commentary_block}
 commentary_line = "//".*
 commentary_block = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] 
-
+comma = ","
 
 %{
     public String lexeme;
@@ -26,6 +26,7 @@ commentary_block = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]
 %%
 {whitespace} {/*Ignore*/}
 {commentary} {/* DO NOTHING */}
+{comma} {lexeme = yytext(); return Token.Tokens.TK_COMMA;}
     
 
 ("+" | "-") {lexeme = yytext(); return Token.Tokens.TK_ADD_ARIT;}
@@ -40,7 +41,7 @@ commentary_block = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]
 
 ( System.out.println | System.out.print | boolean | char | string | switch | static | if | else | switch | while | break | int | String | float | return | break | continue | class | try | public | void ) {lexeme = yytext(); return Token.Tokens.TK_RESERVATION;}
 
-{identifier} {lexeme=yytext(); return Token.Tokens.TK_IDENTIFIER;}
+{identifier}|{L} {lexeme=yytext(); return Token.Tokens.TK_IDENTIFIER;}
 
 ("args") {lexeme = yytext(); return Token.Tokens.TK_OP_ARG;}
 
@@ -68,4 +69,4 @@ commentary_block = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]
 
 (";") {lexeme = yytext(); return Token.Tokens.TK_END_LINE;}
 
- . {System.out.println("ERROR"); return Token.Tokens.TK_ERROR;}
+[^] {System.out.println("BAD ERROR"); return Token.Tokens.TK_ERROR;}
