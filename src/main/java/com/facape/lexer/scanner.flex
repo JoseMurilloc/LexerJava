@@ -26,7 +26,7 @@ espaco=[ ,\t,\r,\n]+
 
 ("=") {lexeme = yytext(); return Token.Tokens.TK_OP_ATR;}
 
-( boolean | char | string | switch | static | if | else | switch | while | break | int | String | float | return | break | continue | class | try | public | void ) {lexeme = yytext(); return Token.Tokens.TK_RESERVATION;}
+( System.out.println | System.out.print | boolean | char | string | switch | static | if | else | switch | while | break | int | String | float | return | break | continue | class | try | public | void ) {lexeme = yytext(); return Token.Tokens.TK_RESERVATION;}
 
 {L}({L}|{D})* {lexeme=yytext(); return Token.Tokens.TK_IDENTIFIER;}
 

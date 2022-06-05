@@ -4,7 +4,7 @@ class HelloWorld {
         float height = 1.70;
 
         if (age > 10 || heigth > 1.40) {
-            return;
+            System.out.println("Maior de 140cm");
         }
     }
 }
