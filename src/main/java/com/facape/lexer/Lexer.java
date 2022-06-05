@@ -23,6 +23,8 @@ public class Lexer {
         
         readContent = readFile(__dirname + "scripts\\" + file + ".txt");
         generatorTokens(readContent);
+        
+        
     }   
     
     private static void generatorTokens(Reader readContent) throws IOException {
@@ -37,7 +39,8 @@ public class Lexer {
        while(true) {
            Token.Tokens token = lexer.yylex();
            if (token == null) {
-               
+                      
+               recorderInFile(listTokens, symbols);
                
                TitleTokenMessage();
                forArrayTokens(listTokens);
@@ -46,7 +49,7 @@ public class Lexer {
                forArraySymbols(symbols);
                return;
            }
-           
+           //System.out.println(lexer.lexeme);
            int find = findLexemeInTableSymbol(symbols, lexer.lexeme);
            if (token == Token.Tokens.TK_ERROR) {
                System.out.println("Error na coluna: " + column + " no seguinte token: " + lexer.lexeme);
@@ -65,11 +68,40 @@ public class Lexer {
            }
            column += 1;
        }
+
     }
     
-    //private static void RecorderInFile(ArrayList<Token> listTokens, ArrayList<TableSymbols> listTokens) {
+    public static void recorderInFile(ArrayList<Token> listTokens, ArrayList<TableSymbols> symbols) throws IOException {
+        FileWriter fileTokens = new FileWriter(__dirname + ".\\outputs\\tokens.txt");
+        FileWriter fileSymbols = new FileWriter(__dirname + ".\\outputs\\symbols.txt");
         
-    //}
+        PrintWriter recorderFileToken = new PrintWriter(fileTokens);
+        PrintWriter recorderFileSymbols = new PrintWriter(fileSymbols);
+        
+        for (Token token : listTokens) {
+            recorderFileToken.printf(token.toString() + "%n");
+        }
+        
+        for (TableSymbols symbol: symbols) {
+            recorderFileSymbols.printf(symbol.toString() + "%n");
+        } 
+        
+        recorderFileToken.close();
+        recorderFileSymbols.close();
+        
+        System.out.println("   ('-.       .-') _  _ .-') _   \n" +
+" _(  OO)     ( OO ) )( (  OO) )  \n" +
+"(,------.,--./ ,--,'  \\     .'_  \n" +
+" |  .---'|   \\ |  |\\  ,`'--..._) \n" +
+" |  |    |    \\|  | ) |  |  \\  ' \n" +
+"(|  '--. |  .     |/  |  |   ' | \n" +
+" |  .--' |  |\\    |   |  |   / : \n" +
+" |  `---.|  | \\   |   |  '--'  / \n" +
+" `------'`--'  `--'   `-------'  ");
+        System.out.println("Arquivos gerados com sucesso");
+        
+
+    }
     
     private static void forArrayTokens(ArrayList<Token> listTokens) {
         for (Token token : listTokens) {

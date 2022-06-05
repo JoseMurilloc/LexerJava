@@ -1,5 +1,7 @@
 class HelloWorld {
     public static void main(String args[]) {
+        // Comentario java
+        /* Comentarios javas */
         int age = 10;   
         float height = 1.70 * age;
         float media = 10 - 10.2;

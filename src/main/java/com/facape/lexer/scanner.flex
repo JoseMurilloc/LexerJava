@@ -5,16 +5,28 @@ package com.facape.lexer;
 %type Token.Tokens
 
 
-L   =[a-zA-Z_]+
+L   =[a-zA-Z]
 D=[0-9]+
-espaco=[ ,\t,\r,\n]+
+identifier   = ({L}|"_")({L}|{D}|"_")*
+
+
+space = " "
+line_end = \n|\r|\r\n
+whitespace = {space}|{line_end}| [\t\n]
+
+commentary = {commentary_line}|{commentary_block}
+commentary_line = "//".*
+commentary_block = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] 
 
 
 %{
     public String lexeme;
+    public int countLine = 1;
 %}
 %%
-{espaco} {/*Ignore*/}
+{whitespace} {/*Ignore*/}
+{commentary} {/* DO NOTHING */}
+    
 
 ("+" | "-") {lexeme = yytext(); return Token.Tokens.TK_ADD_ARIT;}
 
@@ -28,7 +40,9 @@ espaco=[ ,\t,\r,\n]+
 
 ( System.out.println | System.out.print | boolean | char | string | switch | static | if | else | switch | while | break | int | String | float | return | break | continue | class | try | public | void ) {lexeme = yytext(); return Token.Tokens.TK_RESERVATION;}
 
-{L}({L}|{D})* {lexeme=yytext(); return Token.Tokens.TK_IDENTIFIER;}
+{identifier} {lexeme=yytext(); return Token.Tokens.TK_IDENTIFIER;}
+
+("args") {lexeme = yytext(); return Token.Tokens.TK_OP_ARG;}
 
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Token.Tokens.TK_NUMBER;}
 
