@@ -3,7 +3,7 @@ class HelloWorld {
         String name = "Murillo";
         int age = 10;   
 
-        if (name == "" && age > 10) {
+        if (name == "nunes" && age > 10) {
             return;
         }
     }

@@ -3,9 +3,8 @@ class HelloWorld {
         int age = 10;   
         float height = 1.70;
 
-        if (age > 10 || heigth > 1.40) {
+        if (age > 10 && heigth > 1.40) {
             System.out.println("Maior de 140cm");
         }
     }
 }
-

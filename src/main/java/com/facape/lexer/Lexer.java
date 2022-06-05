@@ -29,6 +29,8 @@ public class Lexer {
        ArrayList<Token> listTokens = new ArrayList<Token>();
        int positionTable = 0;
        ArrayList<TableSymbols> symbols = new ArrayList<TableSymbols>();
+       int line = 1;
+       int column = 0;
        
        LexerScanner lexer = new LexerScanner(readContent);
        
@@ -45,6 +47,9 @@ public class Lexer {
            }
            
            int find = findLexemeInTableSymbol(symbols, lexer.lexeme);
+           if (token == Token.Tokens.TK_ERROR) {
+               System.out.println(lexer.lexeme);
+           }
            if(find == -1) {
               Token newToken = new Token(positionTable, token);
               TableSymbols newSymbol = new TableSymbols(positionTable, lexer.lexeme, token);
@@ -53,12 +58,18 @@ public class Lexer {
               symbols.add(newSymbol);
               
               positionTable += 1;
+              column +=1;
            } else {
                Token newToken = new Token(find, token);
                listTokens.add(newToken);
+               column += 1;
            }
        }
     }
+    
+    //private static void RecorderInFile(ArrayList<Token> listTokens, ArrayList<TableSymbols> listTokens) {
+        
+    //}
     
     private static void forArrayTokens(ArrayList<Token> listTokens) {
         for (Token token : listTokens) {

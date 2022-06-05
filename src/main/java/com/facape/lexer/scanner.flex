@@ -34,7 +34,7 @@ espaco=[ ,\t,\r,\n]+
 
 {D}+"."{D}* {lexeme = yytext(); return Token.Tokens.TK_NUMBER_FLOAT;}
 
-"/*" [^*] ~"*/" | "/*" "*"+ "/" {lexeme = yytext(); return Token.Tokens.TK_OP_MULT;}
+("*" | "&&" | "%") {lexeme = yytext(); return Token.Tokens.TK_OP_MULT;}
 
 ("[") {lexeme = yytext(); return Token.Tokens.TK_OPEN_ARRAY;}
 
