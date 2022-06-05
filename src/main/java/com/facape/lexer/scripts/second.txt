@@ -1,0 +1,10 @@
+class HelloWorld {
+    public static void main(String args[]) {
+        String name = "Murillo";
+        int age = 10;   
+
+        if (name == "" && age > 10) {
+            return;
+        }
+    }
+}
