@@ -2,5 +2,6 @@ class HelloWorld {
     public static void main(String args[]) {
         string na_me = "Murillo";
         int age = 10;
+        boolean x = true;
     }
 }

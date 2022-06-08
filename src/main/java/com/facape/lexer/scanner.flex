@@ -43,7 +43,7 @@ comma = ","
 
 {identifier}|{L} {lexeme=yytext(); return Token.Tokens.TK_IDENTIFIER;}
 
-("args") {lexeme = yytext(); return Token.Tokens.TK_OP_ARG;}
+("arg[]"|"args[]") {lexeme = yytext(); System.out.println(lexeme); return Token.Tokens.TK_OP_ARG;}
 
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Token.Tokens.TK_NUMBER;}
 
